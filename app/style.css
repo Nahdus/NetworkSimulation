@@ -1,0 +1,120 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: #eee;
+  }
+
+  .container {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center canvas horizontally */
+    align-items: center;     /* Center canvas vertically */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .hide{
+    display: none;
+  }
+  
+  .buttons {
+    position: absolute;
+    bottom: 20px; /* Distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2
+  }
+
+  .slider-container{
+    position: absolute;
+    bottom: 50%; /* Distance from the bottom */
+    left: 90%;
+    transform: translateX(-50%);
+    z-index: 2
+  }
+
+  button {
+    margin: 5px; /* Space between buttons */
+  }
+
+  .slider-container {
+    transform: rotate(-90deg);
+  }
+  .slider {
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 15px;
+    background: white;
+    z-index: 10;
+    outline: none;
+  }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 20px;
+    background: #62438a;
+    cursor: pointer;
+    -webkit-transition: 0.1s ease-in-out;
+    transition: 0.1s ease-in-out;
+  }
+  .slider::-moz-range-thumb {
+    width: 10px;
+    height: 20px;
+    background: #62438a;
+    cursor: pointer;
+    border: none;
+    -moz-transition: 0.1s ease-in-out;
+    transition: 0.1s ease-in-out;
+  }
+  .slider::-moz-range-track {
+    background: #fff;
+  }
+  .slider:active::-webkit-slider-thumb {
+    background: #4a3268;
+  }
+  .slider:active::-moz-range-thumb {
+    background: #4a3268;
+  }
+  .slider:active + #slider-value {
+    opacity: 1;
+    background: #4a3268;
+    top: -92px;
+    transform: scale(1, 1) translateX(-50%);
+  }
+  
+  
+  
+  
+  .range {
+    position: relative;
+  }
+  .triangle {
+    width: 300px;
+    height: 55px;
+    background: linear-gradient(90deg, rgb(248, 80, 50) 0%, rgb(248, 80, 50) 33.33%, rgb(255, 255, 0) 33.33%, rgb(255, 255, 0) 66.66%, rgb(166, 255, 0) 66.66%, rgb(166, 255, 0) 100%);
+    clip-path: polygon(100% 0%, 100% 100%, 0% 100%)
+  }
+  .lines {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-right: -2px;
+  }
+  .lines > p {
+    height: 100%;
+    width: 2px;
+    background: #eee;
+    margin: 0;
+    font-size: 10px;
+  }
