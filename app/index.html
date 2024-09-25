@@ -1,65 +1,68 @@
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>My three.js app</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link rel="stylesheet" href="./style.css">
-		<style>
-			body {
-				margin: 0;
-			}
-		</style>
-		<div class="container">
-			<canvas id="c"></canvas>
-		</div>
-		<div class="buttons">
-			<button id="addHub">Add hub</button>
-			<button id="addNode">Add node</button>
-			<button id="addEdge">Build Edge</button>
-			<button id="modify">Modify</button>
-			<button id="delete">Delete</button>
-			<button id="clear">Clear</button>
-		</div>
-		<div class="slider-container hide" id="healthSlider">
-			<div class="range">
-				<div class="triangle">
-				</div>
-				<div class="lines">
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-				</div>
-			</div>
-			<input type="range" min="0" max="100" value="100" class="slider">
-		</div>
-
-		<script src="../build/bundle.js" defer></script>
-
-
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Friendly UI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
+
+    <div class="container">
+        <!-- Canvas area for Three.js -->
+        <div class="canvas-container">
+            <canvas class="networkCanvas" id="c"></canvas>
+        </div>
+
+        <!-- Slider on the right with label -->
+        <div class="slider-container" id="healthSlider">
+            <label for="healthSlider" class="slider-label">Health</label>
+            <input type="range" min="1" max="100" value="50" class="slider" >
+        </div>
+
+        <!-- Bottom controls with stylish square buttons -->
+        <div class="controls-container">
+            <div class="button" id="addHub">
+                <img src="./images/Hub.svg" alt="Add Hub">
+                <p>Add Hub</p>
+            </div>
+            <div class="button" id="addNode">
+                <img src="./images/node.svg" alt="Add Node">
+                <p>Add Node</p>
+            </div>
+            <div class="button" id="addEdge">
+                <img src="./images/edge.svg" alt="Add Edge">
+                <p>Add Edge</p>
+            </div>
+            <div class="button" id="modify">
+                <img src="./images/modify.svg" alt="Modify">
+                <p>Modify</p>
+            </div>
+            <div class="button" id="delete">
+                <img src="./images/delete.svg" alt="Delete">
+                <p>Delete</p>
+            </div>
+            <div class="button" id="clear">
+                <img src="./images/clear.svg" alt="Clear">
+                <p>Clear</p>
+            </div>
+        </div>
+    </div>
+    <script src="../build/bundle.js" defer></script>
+    <script >
+        // Script to handle button toggle effect (depressed and pop out)
+document.querySelectorAll('.button').forEach(button => {
+    button.addEventListener('click', function(x) {
+        console.log(x)
+        // Toggle the 'active' class on the clicked button
+        document.querySelectorAll('.button').forEach(button=>{
+            console.log(this.classList.remove)
+            button.classList.remove('active')
+        })
+        
+        this.classList.toggle('active');
+    });
+});
+    </script>
 </body>
 </html>

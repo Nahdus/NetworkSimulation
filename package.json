@@ -15,8 +15,11 @@
   "dependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
     "matrix-multiplication": "^0.5.2",
     "rollup": "^4.21.2",
+    "rollup-plugin-dotenv": "^0.5.1",
     "serve": "^14.2.3",
     "three": "^0.168.0",
     "uuid": "^10.0.0"

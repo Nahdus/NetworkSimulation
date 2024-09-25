@@ -22,19 +22,20 @@ const network =()=>{
     let networkMap = {}
     let nodeCordinate = {}
     let nodeAttributes ={}
-    let _callbackfn
+    let _callbackfns = []
     const subscribe=(callbackfn)=>{
-        _callbackfn=callbackfn
+        _callbackfns.push(callbackfn)
     }
 
     const _notify = (fromFunc)=>{
-        if (_callbackfn){
-
-            _callbackfn({
-                networkMap,
-            nodeCordinate,
-            nodeAttributes
-            },fromFunc)
+        if (_callbackfns){
+            _callbackfns.forEach((_callbackfn)=>{
+                _callbackfn({
+                    networkMap,
+                nodeCordinate,
+                nodeAttributes
+                },fromFunc)
+            })
         }
     }
     const addNode=(uuid,coordinate,health,nodeType)=>{

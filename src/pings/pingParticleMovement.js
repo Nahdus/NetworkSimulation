@@ -26,7 +26,7 @@ const pingParticleMovement = ([startPosX, startPosY],[endPosX,endPosY])=>{
 
     const update = (delta)=>{
         let theta = Math.atan((endPosY-startPosY)/(endPosX - startPosX))
-        let distance = new THREE.Vector2(startPosX,startPosY).distanceTo(new THREE.Vector2(endPosX,endPosY))
+        // let distance = new THREE.Vector2(startPosX,startPosY).distanceTo(new THREE.Vector2(endPosX,endPosY))
         if(Math.abs(endPosX - startPosX)<0.5){
             theta = Math.atan((endPosX - startPosX)/(endPosY-startPosY))
             if(currentY<endPosY){

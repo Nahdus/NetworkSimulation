@@ -1,6 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve'; // locate and bundle dependencies in node_modules (mandatory)
 import terser from '@rollup/plugin-terser'; // code minification (optional)
-
+import dotenv from "rollup-plugin-dotenv"
 export default [{
 	input: 'src/main.js',
 	output: [
@@ -11,7 +11,7 @@ export default [{
 			sourcemap: true
 		}
 	],
-	plugins: [ resolve(), terser() ]
+	plugins: [ resolve(), terser(),dotenv() ]
 },
 {
 	input: 'test/main.js',
@@ -22,6 +22,6 @@ export default [{
 			file: 'testbuild/bundle.js'
 		}
 	],
-	plugins: [ resolve(), terser() ]
+	plugins: [ resolve(), terser(),dotenv() ]
 }
 ];

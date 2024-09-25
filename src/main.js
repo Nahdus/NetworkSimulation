@@ -3,14 +3,15 @@ import {raycaster} from "./raycaster/raycaster"
 import {networkNode} from "./graph/nodes/networkNode"
 import {networkEdge} from "./graph/edges/networkEdge"
 import {network} from "./network/network"
+import {networkHeartBeat} from "./network/networkHeartBeat"
 import {Stage} from "./stage/stage"
 import { v4 as uuidv4 } from 'uuid';
 import {pingParticleMovement} from "../src/pings/pingParticleMovement"
 import {particleEmitter} from "../src/pings/particleEmmitter"
- 
+import {ticketSim} from "./ticketSim/ticketsim"
 let entities = []
 let networkGraph = network()
-
+networkHeartBeat(networkGraph)
 
 
 const stage = Stage([...entities])
@@ -29,6 +30,7 @@ let highlight = {
 
 // let particle = pingParticleMovement([-1,0],[1,1])
 let emitter = particleEmitter(networkGraph)
+let ticketSimulator = ticketSim(networkGraph)
 let previousTime = 0
 const update = (currentTime)=>{
 
@@ -37,7 +39,7 @@ const update = (currentTime)=>{
   previousTime = currentTime;
   // particle.update(deltaTime)
   emitter.update(deltaTime)
-
+  ticketSimulator.update(deltaTime)
   let {nodeCordinate,networkMap,nodeAttributes} = networkGraph.getNetworkDetail()
   let nodeEntities = Object.keys(nodeCordinate).map(each=>{
     let xC = nodeCordinate[each][0]
@@ -124,6 +126,7 @@ clearButton?.addEventListener("click",()=>{
 nodeButton?.addEventListener("click",()=>{
   mode ="node"
   type = "ordinary"
+  console.log("clicked on node Button")
   resetHighlight()
 })
 
@@ -296,7 +299,7 @@ const onCanvasClick = (event) =>{
       
         clickedOnobjects.forEach(each=>{
           if(each.object['userData']['componentType'] == "node"){
-            console.log(slider?.className)
+            // console.log(slider?.className)
             let selectedUuid = each.object["uuid"]
             highlight.selectedNode=[selectedUuid]
             // tempEdgeEndPoints.push(each.object["uuid"])
@@ -314,6 +317,7 @@ const onCanvasClick = (event) =>{
             console.log()
             slideAdjuster.value = nodeAttributes[selectedUuid]["health"]
             slideAdjuster.onchange=function() {
+              console.log(this.value)
               networkGraph.setNodeHealth(selectedUuid,Number(this.value))
             }
 

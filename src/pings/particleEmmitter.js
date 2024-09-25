@@ -12,20 +12,18 @@ const particleEmitter = (network)=>{
     let route = {}
     let cumulativeWeight = {}
 
-    let movemets
+    let movemets = []
 
     const signal=(changedNetwork,funcName)=>{
+        movemets=[]
         _network = changedNetwork
         cumulativeWeight = buildCumulativeMap(_network.networkMap)
         console.log("----------------signal--------------")
         updateRoute()
-        movemets = Object.keys(route).map((key)=>{
+        Object.keys(route).forEach((key)=>{
             if (route[key]){
     
-                return {from:key,mover:pingParticleMovement(route[key]["fromto"][0],route[key]["fromto"][1])}
-            }
-            else{
-                return false
+                movemets.push({from:key,mover:pingParticleMovement(route[key]["fromto"][0],route[key]["fromto"][1])})
             }
         })
     }
@@ -44,8 +42,9 @@ const particleEmitter = (network)=>{
     
     
     const updateRoute = () =>{
+        route={}
         if(Object.keys(_network.networkMap).length==0){
-            route={}
+            return
         }
         Object.keys(_network.networkMap).forEach((fromUuid)=>{
             if(_network.networkMap[fromUuid].length>0){
@@ -60,13 +59,9 @@ const particleEmitter = (network)=>{
             }
         })
     }
-    movemets = Object.keys(route).map((key)=>{
+    Object.keys(route).forEach((key)=>{
         if (route[key]){ 
-
-            return {from:key,mover:pingParticleMovement(route[key]["fromto"][0],route[key]["fromto"][1])}
-        }
-        else{
-            return false
+            movemets.push({from:key,mover:pingParticleMovement(route[key]["fromto"][0],route[key]["fromto"][1])})
         }
     })
     const update=(delta)=>{
@@ -77,11 +72,15 @@ const particleEmitter = (network)=>{
                     
                     let newFromID = route[movemet.from].destination
                     updateRoute()
-                    let nextFromCordinate = route[newFromID]["fromto"][0]
-                    let nextDestinationCordinate = route[newFromID]["fromto"][1]
-                    let mover = pingParticleMovement(nextFromCordinate,nextDestinationCordinate)
-                    // movemet.mover.resetReach()
-                    movemet.mover = mover
+                    //fix
+                    if (route[newFromID]){
+
+                        let nextFromCordinate = route[newFromID]["fromto"][0]
+                        let nextDestinationCordinate = route[newFromID]["fromto"][1]
+                        let mover = pingParticleMovement(nextFromCordinate,nextDestinationCordinate)
+                        // movemet.mover.resetReach()
+                        movemet.mover = mover
+                    }
                 }else{
                     movemet.mover.update(delta)
                 }

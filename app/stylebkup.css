@@ -118,3 +118,14 @@ html, body {
     margin: 0;
     font-size: 10px;
   }
+
+.buttonImageBlock{ 
+  position: absolute;
+  background: #999;
+  }
+
+.buttonComponents {
+  
+  background:#ccc;
+  
+  }
